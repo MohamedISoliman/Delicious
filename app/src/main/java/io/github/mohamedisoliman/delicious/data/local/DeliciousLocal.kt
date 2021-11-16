@@ -1,4 +1,4 @@
-package io.github.mohamedisoliman.delicious.data.remote
+package io.github.mohamedisoliman.delicious.data.local
 
 import android.content.Context
 import io.github.mohamedisoliman.delicious.domain.entities.Restaurant

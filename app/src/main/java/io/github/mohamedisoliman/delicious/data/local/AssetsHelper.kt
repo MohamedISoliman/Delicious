@@ -1,4 +1,4 @@
-package io.github.mohamedisoliman.delicious.data.remote
+package io.github.mohamedisoliman.delicious.data.local
 
 import android.content.Context
 import com.squareup.moshi.Moshi
