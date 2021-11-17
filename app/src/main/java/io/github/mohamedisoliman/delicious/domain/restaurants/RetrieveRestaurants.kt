@@ -3,8 +3,9 @@ package io.github.mohamedisoliman.delicious.domain.restaurants
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class RetrieveRestaurants(
+class RetrieveRestaurants @Inject constructor(
     private val repository: RestaurantsRepositoryContract,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : () -> Flow<HomeViewState> {

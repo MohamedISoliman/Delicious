@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Delicious</string>
+    <string name="emptyViewMessage">It\'s time to meditate :)</string>
+    <string name="defaultErrorMessage">Something wrong happened!</string>
+    <string name="home_screen">home screen</string>
+    <string name="post_details">Post details</string>
 </resources>
