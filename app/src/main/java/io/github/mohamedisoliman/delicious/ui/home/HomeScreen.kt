@@ -28,17 +28,26 @@ fun HomeScreen(
 ) {
     val viewState = viewModel.state().observeAsState()
     val state = viewState.value ?: HomeViewState.Idle
-    HomeContent(state)
+    HomeContent(
+        state = state,
+        onSearchChange = {
+            viewModel.search(it)
+        }
+    )
 }
 
 @Composable
 private fun HomeContent(
     state: HomeViewState = HomeViewState.Idle,
     onItemClicked: (String) -> Unit = { },
+    onSearchChange: (String) -> Unit,
 ) {
     Column {
 
-        SearchTopBar()
+        SearchTopBar(
+            onSearchChange = onSearchChange,
+            searchText = state.searchText ?: ""
+        )
 
         Box(
             modifier = Modifier
@@ -47,7 +56,11 @@ private fun HomeContent(
             contentAlignment = Alignment.Center
         ) {
             LoadingView(modifier = Modifier.align(Alignment.Center), isLoading = state.isLoading)
-            ListView(list = state.restaurants, onItemClicked = onItemClicked)
+            ListView(
+                modifier = Modifier.align(Alignment.TopCenter),
+                list = state.restaurants,
+                onItemClicked = onItemClicked
+            )
             EmptyView(list = state.restaurants)
             ErrorView(throwable = state.throwable)
         }
