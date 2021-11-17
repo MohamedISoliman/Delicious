@@ -1,8 +1,10 @@
 package io.github.mohamedisoliman.delicious.domain.restaurants
 
 import io.github.mohamedisoliman.delicious.domain.entities.Restaurant
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
@@ -19,6 +21,6 @@ class SearchRestaurants @Inject constructor() : (String, List<Restaurant>?) -> F
 
         }.onStart {
             emit(HomeViewState.SearchResult(text = query, data = restaurants))
-        }
+        }.flowOn(Dispatchers.IO)
 
 }

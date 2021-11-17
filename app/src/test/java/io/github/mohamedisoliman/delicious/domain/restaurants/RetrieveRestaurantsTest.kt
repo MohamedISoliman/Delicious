@@ -70,6 +70,31 @@ class RetrieveRestaurantsTest {
     }
 
     @Test
+    fun `interactor invoked With Local unsorted result THEN return success state with sorted result`() {
+        return runBlocking {
+
+            val local = mockk<DeliciousLocal>()
+            val repo = RestaurantsRepository(local)
+            val interactor = RetrieveRestaurants(repository = repo)
+
+
+            val expectedSuccessful = listOf(
+                fakeRestaurant(status = "closed"),
+                fakeRestaurant(status = "open"),
+                fakeRestaurant(status = "order ahead")
+            )
+
+            every { local.retrieveRestaurants() } returns flowOf(expectedSuccessful)
+
+            val state = interactor.invoke().drop(1).first()
+
+            assertEquals("open", state.restaurants?.first()?.status)
+            assertEquals("closed", state.restaurants?.last()?.status)
+
+        }
+    }
+
+    @Test
     fun `interactor invoked With Exception THEN return Failure state`() = runBlocking {
         val local = mockk<DeliciousLocal>()
         val repo = RestaurantsRepository(local)

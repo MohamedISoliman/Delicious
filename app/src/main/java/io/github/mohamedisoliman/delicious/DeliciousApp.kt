@@ -2,7 +2,16 @@ package io.github.mohamedisoliman.delicious
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import logcat.AndroidLogcatLogger
+import logcat.LogPriority
 
 
 @HiltAndroidApp
-class DeliciousApp : Application()
+class DeliciousApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)
+    }
+}
