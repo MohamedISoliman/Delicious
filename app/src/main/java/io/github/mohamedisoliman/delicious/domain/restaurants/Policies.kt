@@ -5,7 +5,7 @@ enum class RestaurantStatus(val order: Int) {
     OPEN(1),
     ORDER_AHEAD(2),
     CLOSED(3),
-    UNKNOWN(0)
+    UNKNOWN(4)
 }
 
 fun String?.toStatusEnum(): RestaurantStatus {
